@@ -1,70 +1,61 @@
 <?php
 
-const HEAD_START = 50;
-
 class Safe
 {
-	private readonly int $headMin;
-	private readonly int $headMax;
-	private readonly int $dialSteps;
-
-	private int $headPosition;
+	private readonly int $dialPositions;
 
 	private int $zeroes;
 
-	public function __construct()
+	public function __construct(private readonly int $dialMin = 0, private readonly int $dialMax = 99, private int $dialPosition = 50)
 	{
-		$this->headMin = 0;
-		$this->headMax = 99;
+		echo "The dial starts by pointing at {$this->dialPosition}." . PHP_EOL;
 
-		$this->dialSteps = $this->headMax - $this->headMin + 1;
-
-		$this->headPosition = HEAD_START;
+		$this->dialPositions = $this->dialMax - $this->dialMin + 1;
 
 		$this->zeroes = 0;
-
-		echo "The dial starts by pointing at {$this->headPosition}." . PHP_EOL;
 	}
 
-	private function rotateDial(string $movement): void
+	private function rotateDial(string $rotation): void
 	{
-		$movement = trim($movement);
+		// Sanitize rotation string
+		$rotation = trim(strtoupper($rotation));
 
-		$direction = $movement[0];  // L or R
-		$distance = (int)substr($movement, 1);
+		$direction = $rotation[0];  // L or R
+		$distance = (int)substr($rotation, 1);
 
 		// Rotate
-		$this->headPosition = match ($direction)
+		$this->dialPosition = match ($direction)
 		{
-			'L' => $this->headPosition - $distance,
-			'R' => $this->headPosition + $distance,
+			'L' => $this->dialPosition - $distance,
+			'R' => $this->dialPosition + $distance,
 		};
 
-		$this->checkHeadPositionBounds();
+		$this->checkZeroes();
 
-		// Zero?
-		if ($this->headPosition == 0)
+		echo "- The dial is rotated $rotation to point at {$this->dialPosition}." . PHP_EOL;
+	}
+
+	public function processRotationsFile(string $filename): void
+	{
+		$lines = file($filename);
+
+		foreach ($lines as $line)
+			$this->rotateDial($line);
+	}
+
+	private function checkZeroes(): void
+	{
+		// Dial out of bounds?
+		if ($this->dialPosition > $this->dialMax)
+			while ($this->dialPosition > $this->dialMax)
+				$this->dialPosition -= $this->dialPositions;
+		elseif ($this->dialPosition < $this->dialMin)
+			while ($this->dialPosition < $this->dialMin)
+				$this->dialPosition += $this->dialPositions;
+
+		// Dial at Zero?
+		if ($this->dialPosition == 0)
 			$this->zeroes++;
-
-		echo "The dial is rotated $movement to point at {$this->headPosition}." . PHP_EOL;
-	}
-
-	private function checkHeadPositionBounds(): void
-	{
-		if ($this->headPosition > $this->headMax)
-			while ($this->headPosition > $this->headMax)
-				$this->headPosition -= $this->dialSteps;
-		elseif ($this->headPosition < $this->headMin)
-			while ($this->headPosition < $this->headMin)
-				$this->headPosition += $this->dialSteps;
-	}
-
-	public function processInput(string $movementsFile): void
-	{
-		$movements = file($movementsFile);
-
-		foreach ($movements as $movement)
-			$this->rotateDial($movement);
 	}
 
 	public function showPassword(): void
@@ -75,5 +66,5 @@ class Safe
 
 // Main block
 $safe = new Safe();
-$safe->processInput(__DIR__ . '/input');
+$safe->processRotationsFile(__DIR__ . '/input');
 $safe->showPassword();
