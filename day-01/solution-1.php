@@ -1,6 +1,6 @@
 <?php
 
-class Safe
+class Safe1
 {
 	private readonly int $dialPositions;
 
@@ -65,6 +65,6 @@ class Safe
 }
 
 // Main block
-$safe = new Safe();
+$safe = new Safe1();
 $safe->processRotationsFile(__DIR__ . '/input');
 $safe->showPassword();
