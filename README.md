@@ -29,6 +29,11 @@ You can run any solution file via **PHP CLI** (no web browser needed), for examp
 
 To keep solutions as simple as possible, no third-party libraries are used.
 
+Two input files are included for each solution:
+
+- The first file, `input-example` contains a few test values
+- The second file, `input` contains the real list of values needed to get the correct answer
+
 ## Setup
 
 * **PHP version:** 8.5.0
