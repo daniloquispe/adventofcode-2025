@@ -6,8 +6,8 @@ Here are my full solutions for [Advent of Code 2025](https://adventofcode.com/20
 
 From the official website:
 
-> Advent of Code is an [Advent calendar](https://en.wikipedia.org/wiki/Advent_calendar) of small programming puzzles for a
-variety of skill levels that can be solved in any programming language you like. People use
+> Advent of Code is an [Advent calendar](https://en.wikipedia.org/wiki/Advent_calendar) of small programming puzzles for
+> a variety of skill levels that can be solved in any programming language you like. People use
 them as interview prep, company training, university coursework, practice problems, a speed contest, or to challenge 
 each other. You can get more info about Advent of code 2025 [here](https://adventofcode.com/2025/about).
 
@@ -29,16 +29,18 @@ You can run any solution file via **PHP CLI** (no web browser needed), for examp
 
 To keep solutions as simple as possible, no third-party libraries are used.
 
-Two input files are included for each solution:
+Two input (plain text) files are included for each solution:
 
 - The first file, `input-example` contains a few test values
 - The second file, `input` contains the real list of values needed to get the correct answer
 
+You can change the loaded filename directly in the `solution-1.php` or `solution-2.php` files.
+
 ## Setup
 
-* **PHP version:** 8.5.0
+* **PHP version:** 8.5.1
 * **OS:** [Manjaro Linux](https://manjaro.org/) with [GNOME desktop](https://www.gnome.org/)
-* **IDE:** [PhpStorm 2025-2.5](https://www.jetbrains.com/phpstorm/)
+* **IDE:** [PhpStorm 2025-3.1](https://www.jetbrains.com/phpstorm/)
 
 IDE and AI features (such as autocomplete or code snippets suggest) are used only for coding/typing speed purposes. No
 AI-generated code was used in any of the solutions.
