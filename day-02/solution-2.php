@@ -1,6 +1,6 @@
 <?php
 
-class IdsChecker1
+class IdsChecker2
 {
 	private int $sum = 0;
 
@@ -33,15 +33,24 @@ class IdsChecker1
 
 	private function isInvalidId(int $id): bool
 	{
-		if (strlen($id) % 2 != 0)
-			return false;
+		$length = strlen($id);
 
 		$halfLength = strlen($id) / 2;
 
-		$firstHalf = substr($id, 0, $halfLength);
-		$secondHalf = substr($id, $halfLength);
+		for ($patternLength = 1; $patternLength <= $halfLength; $patternLength++)
+		{
+			$pattern = substr($id, 0, $patternLength);
 
-		return strcmp($firstHalf, $secondHalf) == 0;
+			if ($length % $patternLength != 0)
+				continue;
+
+			$invalidId = str_pad('', $length, $pattern);
+
+			if (!strcmp($id, $invalidId))
+				return true;
+		}
+
+		return false;
 	}
 
 	public function showInvalidIdsSum(): void
@@ -51,6 +60,6 @@ class IdsChecker1
 }
 
 // Main block
-$checker = new IdsChecker1();
+$checker = new IdsChecker2();
 $checker->processRangesFile(__DIR__ . '/input');
 $checker->showInvalidIdsSum();
