@@ -32,7 +32,7 @@ class PaperRollsGrid1
 	 *
 	 * @var string[]
 	 */
-	private array $rows;
+	protected array $rows;
 
 	/**
 	 * Number of rows in the grid
@@ -74,7 +74,7 @@ class PaperRollsGrid1
 	/**
 	 * Process all cells in the grid, row by row.
 	 */
-	private function processRows(): void
+	protected function processRows(): void
 	{
 		for ($rowIndex = 0; $rowIndex < $this->rowsCount; $rowIndex++)
 		{
