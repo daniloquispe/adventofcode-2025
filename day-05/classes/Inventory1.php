@@ -20,7 +20,7 @@ class Inventory1
 	 *
 	 * @var string[]
 	 */
-	private array $freshIdRanges;
+	protected array $freshIdRanges;
 
 	/**
 	 * List of available ingredient IDs
@@ -32,7 +32,7 @@ class Inventory1
 	/**
 	 * Count of fresh ingredients in the inventory.
 	 */
-	private int $freshIngredientsCount;
+	protected int $freshIngredientsCount;
 
 	/**
 	 * Load the ingredients database from a plain-text file and count how many fresh ingredients are in the inventory.
@@ -81,7 +81,7 @@ class Inventory1
 	 *
 	 * @see $freshIdRanges
 	 */
-	private function countFreshIngredients(): void
+	protected function countFreshIngredients(): void
 	{
 		$this->freshIngredientsCount = 0;
 
