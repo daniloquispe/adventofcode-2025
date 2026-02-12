@@ -34,7 +34,7 @@ class MathWorksheet1
 	 * @param string[] $lines
 	 * @see calculateGrandTotalFromFile()
 	 */
-	private function calculateGrandTotalFromStrings(array $lines): int
+	protected function calculateGrandTotalFromStrings(array $lines): int
 	{
 		$problems = [];
 
@@ -83,7 +83,7 @@ class MathWorksheet1
 	 *
 	 * @return int|null The result of the arithmetic operation, or `null` if the operator is not supported
 	 */
-	private function solve(array $problem): ?int
+	protected function solve(array $problem): ?int
 	{
 		$operator = array_pop($problem);
 
